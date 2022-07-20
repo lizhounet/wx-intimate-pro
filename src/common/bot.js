@@ -52,7 +52,7 @@ async function getcurrentUser(that) {
     return {
         ...payload,
         robotId: contactSelf.handle() || contactSelf.name(),
-        avatarBase64: base64,
+        avatarBase64: "data:image/png;base64," + base64,
     }
 }
 

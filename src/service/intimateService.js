@@ -104,6 +104,9 @@ async function loadBotConfigAll() {
 async function startTask(that) {
     //先停止所有任务
     cancelAllSchedule();
+    setLocalSchedule("*/30 * * * * ?", async () => {
+        await updateWxUserInfo(that)
+    }, '用户信息更新任务')
     //获取配置
     const botConfig = await getBotConfig()
     //启动定时任务
