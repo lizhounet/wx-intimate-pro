@@ -146,6 +146,7 @@ async function startSayEveryDay(that, sayEveryDays) {
                     }
                 });
             }, `每日说任务-${sayEveryDay.id}`);
+            console.log(`每日说任务-${sayEveryDay.id} 设置成功`)
         })
         console.log("每日说任务设置完成");
     }
@@ -170,7 +171,6 @@ async function startTimedTask(that, timedTasks) {
                 //获取接收人
                 let receivingWxNames = task.receivingObjectName.split(',');
                 //循环发送消息
-                //循环发送消息
                 receivingWxNames.forEach(async (wxName, index) => {
                     //查找联系人
                     let contact = await (await that.Contact.find({ alias: wxName })) || (await that.Contact.find({ name: wxName }))
@@ -187,6 +187,7 @@ async function startTimedTask(that, timedTasks) {
                 });
 
             }, `定时任务-${task.id}`);
+            console.log(`定时任务-${task.id} 设置成功`)
         })
         console.log("定时任务设置完成");
     }

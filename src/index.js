@@ -9,11 +9,16 @@ const { addPlatformDbConfig } = require('./common/platformDb')
 const { WechatyBuilder, log } = Wechaty;
 
 // 服务器host 默认
-let platformHostUrl = 'http://47.102.105.169:9901/api/public/wx-client';
-let applictionToken = '08da623d-1b3d-4768-82ac-c37fa4e7e3d1';
+let platformHostUrl = 'http://47.108.190.69:9901/api/public/wx-client';
+let applictionToken = '';
 const initConfig = {
     PLATFORM_HOST_URL: process.env['PLATFORM_HOST_URL'] || platformHostUrl,
-    APPLICTION_TOKEN: process.env['APPLICTION_TOKEN']||applictionToken,
+    APPLICTION_TOKEN: process.env['APPLICTION_TOKEN'] || applictionToken,
+}
+
+if (!initConfig.APPLICTION_TOKEN || !initConfig.APPLICTION_TOKEN) {
+    console.log("未设置PLATFORM_HOST_URL或APPLICTION_TOKEN，请设置后重试")
+    return;
 }
 //初始化平台配置
 addPlatformDbConfig(initConfig)
