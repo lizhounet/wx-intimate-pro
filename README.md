@@ -4,9 +4,12 @@
 node 版本 >16
 
 ## 项目说明
+- 贴心小助手客户端
+- 实现联系人管理、头像处理、智能机器人对话、好友互动、定时任务，情侣每日说等功能的配置
+- 让你的个人微信号，可以像公众号一样自动收发消息
 
-本项目是基于[wechaty](https://github.com/wechaty/wechaty) 的个人开源智能机器人项目，更多关于`wechaty`项目说明及 api
-文档可以移步：[wechaty 介绍](https://wechaty.js.org/docs/howto/)
+本项目是基于[wechaty](https://github.com/wechaty/wechaty) 的个人开源智能机器人项目，使用web uos协议版本实现
+文档地址:[wechaty中文文档](https://wechaty.gitbook.io/wechaty/v/zh/)
 
 ## 更多功能说明
 
@@ -43,6 +46,9 @@ node 版本 >16
 
 其他接口自行申请使用
 ### 配置后台参数
+ **我已经搭建好后台配置的服务,也可以自行部署后台服务,后台配置地址:http://47.108.190.69:9901/client/index.html
+需要可以联系作者(qq:1021907330)开通账号** 
+ **QQ群：106425085** 
 - 配置天行参数，和其他配置
 ![输入图片说明](https://images.gitee.com/uploads/images/2022/0721/142244_63a21e1f_1843061.png "屏幕截图.png")
 - 按需求配置定时任务，情侣每日说，关键词回复等功能
@@ -74,11 +80,18 @@ docker pull 17783042962/wx-intimate:latest
 配置好自己的token
 
 ```shell
-docker run -d -e APPLICTION_TOKEN=配置token--name wx-intimate-bot 17783042962/wx-intimate
+docker run -d -e APPLICTION_TOKEN=配置token --name wx-intimate-bot 17783042962/wx-intimate
 
 ```
 启动成功后查看日志,查看登录二维码，扫码登录即可
 ```
 docker logs -f wx-intimate-bot
 ```
-
+## 功能截图
+![image](https://user-images.githubusercontent.com/59723463/180144721-049dc1ae-df39-4eba-8d38-b5d5e15b9059.png)
+![image](https://user-images.githubusercontent.com/59723463/180144616-217c09f8-9d98-4f8e-be63-5048d3a32b83.png)
+![image](https://user-images.githubusercontent.com/59723463/180144841-fc6bac22-7848-4ec6-813e-a5bd24e5b363.png)
+![image](https://user-images.githubusercontent.com/59723463/180144994-3ee9e827-082d-4466-b7f6-4fa8e7393377.png)
+![image](https://user-images.githubusercontent.com/59723463/180145098-0c9d3982-8c3d-4623-a8bd-1b65c6540254.png)
+![image](https://user-images.githubusercontent.com/59723463/180145173-09889279-336e-4b4f-9192-a8ea30033be2.png)
+![image](https://user-images.githubusercontent.com/59723463/180145296-ab8c9830-9f9b-42f0-9bed-75741098040f.png)
