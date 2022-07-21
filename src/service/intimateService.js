@@ -134,13 +134,13 @@ async function startSayEveryDay(that, sayEveryDays) {
                 receivingWxNames.forEach(async (wxName, index) => {
                     //查找联系人
                     let contact = await (await that.Contact.find({ alias: wxName })) || (await that.Contact.find({ name: wxName }))
-                    if (contact) {
+                    if (contact && sendContent) {
                         console.log(`每日说任务(${sayEveryDay.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
                         await contact.say(sendContent)
                     }
                     //查找群
                     let room = await that.Room.find({ topic: wxName })
-                    if (room) {
+                    if (room && sendContent) {
                         console.log(`每日说任务(${sayEveryDay.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
                         await room.say(sendContent)
                     }
@@ -174,13 +174,13 @@ async function startTimedTask(that, timedTasks) {
                 receivingWxNames.forEach(async (wxName, index) => {
                     //查找联系人
                     let contact = await (await that.Contact.find({ alias: wxName })) || (await that.Contact.find({ name: wxName }))
-                    if (contact) {
+                    if (contact && sendContent) {
                         console.log(`定时任务(${task.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
                         await contact.say(sendContent)
                     }
                     //查找群
                     let room = await that.Room.find({ topic: wxName })
-                    if (room) {
+                    if (room && sendContent) {
                         console.log(`定时任务(${task.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
                         await room.say(sendContent)
                     }

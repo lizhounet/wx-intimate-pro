@@ -1,4 +1,4 @@
-const { loadBotConfigAll, startTask, getKeywordReply, getBotReply } = require('../service/intimateService');
+const { loadBotConfigAll, startTask, getKeywordReply, getBotReply, updateContacts } = require('../service/intimateService');
 const { getBotConfig } = require('../common/botConfigDb')
 /**
  * 根据消息类型过滤私聊消息事件
@@ -20,6 +20,12 @@ async function dispatchFriendFilterByMsgType(that, msg) {
                     await loadBotConfigAll();
                     await startTask(that);
                     await contact.say(`配置更新成功`);
+                    return;
+                }
+                //更新配置拦截
+                if (content.indexOf("更新联系人") > -1) {
+                    await updateContacts(that);
+                    await contact.say(`更新联系人成功`);
                     return;
                 }
                 //获取配置
