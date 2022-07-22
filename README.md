@@ -9,7 +9,9 @@ node 版本 >16
 - 让你的个人微信号，可以像公众号一样自动收发消息
 
 本项目是基于[wechaty](https://github.com/wechaty/wechaty) 的个人开源智能机器人项目，使用web uos协议版本实现
+使用的免费的，现在web uos协议可以用了,不是使用的收费的ipad协议
 文档地址:[wechaty中文文档](https://wechaty.gitbook.io/wechaty/v/zh/)
+## 注意以下的applictionToken不是ipad协议的token,是后台配置里面的账号token,是免费的,找我开通账号后可以看到
 
 ## 更多功能说明
 
