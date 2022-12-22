@@ -74,7 +74,7 @@ node 版本 >16
 
 ```shell
 
-docker pull 17783042962/wx-intimate:latest
+docker pull registry.cn-chengdu.aliyuncs.com/lizhounet/wx-intimate:1.0
 
 ```
 
@@ -82,7 +82,7 @@ docker pull 17783042962/wx-intimate:latest
 配置好自己的token
 
 ```shell
-docker run -d -e APPLICTION_TOKEN=配置token --name wx-intimate-bot 17783042962/wx-intimate
+docker run -d -e APPLICTION_TOKEN=配置token --name wx-intimate-bot registry.cn-chengdu.aliyuncs.com/lizhounet/wx-intimate:1.0
 
 ```
 启动成功后查看日志,查看登录二维码，扫码登录即可
