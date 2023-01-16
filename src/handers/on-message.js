@@ -1,5 +1,7 @@
 const { loadBotConfigAll, startTask, getKeywordReply, getBotReply, updateContacts } = require('../service/intimateService');
 const { getBotConfig } = require('../common/botConfigDb')
+const { sendMessage } = require('../common/sendMessage')
+const { FileBox } = require('file-box')
 /**
  * 根据消息类型过滤私聊消息事件
  * @param {*} that bot实例
@@ -29,14 +31,14 @@ async function dispatchFriendFilterByMsgType(that, msg) {
                     return;
                 }
                 //获取配置
-                const botConfig = await getBotConfig()
+                const botConfig = await getBotConfig();
                 //是否开启私聊
                 if (botConfig.wxBotConfig.talkPrivateAutoReplyFlag == 1) {
                     //获取关键字回复
                     let replyContent = await getKeywordReply(content);
                     if (replyContent != null) {
                         console.log(`关键字回复：${replyContent}`);
-                        await contact.say(replyContent);
+                        await sendMessage(that,contact,null,replyContent);
                     }
                     else {
                         //调用机器人回复
@@ -109,7 +111,7 @@ async function dispatchRoomFilterByMsgType(that, room, msg) {
                     let replyContent = await getKeywordReply(content);
                     if (replyContent != null) {
                         console.log(`群聊关键字回复：${replyContent}`);
-                        await room.say(replyContent, contact)
+                        await sendMessage(that,contact,room,replyContent);
                     }
                     else {
                         //获取配置
@@ -119,7 +121,7 @@ async function dispatchRoomFilterByMsgType(that, room, msg) {
                             //调用机器人回复
                             let replyContent = await getBotReply(content, contact.name());
                             console.log(`群聊机器人回复：${replyContent}`);
-                            await room.say(replyContent, contact)
+                            await room.say(replyContent, contact);
                         }
                     }
                 }
@@ -146,6 +148,7 @@ async function dispatchRoomFilterByMsgType(that, room, msg) {
     }
 
 }
+
 async function onMessage(msg) {
     try {
         const room = msg.room() // 是否为群消息

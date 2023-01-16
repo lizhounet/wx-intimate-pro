@@ -3,6 +3,7 @@ const { getContacts, getcurrentUser } = require('../common/bot')
 const { setLocalSchedule, cancelAllSchedule } = require('../common/scheduleUtils')
 const { addBotConfig, getBotConfig } = require('../common/botConfigDb')
 const { getPlatformDbConfig } = require('../common/platformDb')
+const { sendMessage } = require('../common/sendMessage')
 /**
  * 获取定时任务发送内容
  * @param taskId 定时任务id
@@ -122,7 +123,7 @@ async function startSayEveryDay(that, sayEveryDays) {
     if (sayEveryDays && sayEveryDays.length > 0) {
         sayEveryDays.forEach(sayEveryDay => {
             setLocalSchedule(sayEveryDay.sendTime, async () => {
-                //获取定时任务发送内容
+                //获取每日说任务发送内容
                 let sendContent = await getSayEveryDayText(sayEveryDay.id);
                 if (sendContent == null) {
                     console.log(`获取每日说任务(${sayEveryDay.id})发送内容为空`);
@@ -136,13 +137,13 @@ async function startSayEveryDay(that, sayEveryDays) {
                     let contact = await (await that.Contact.find({ alias: wxName })) || (await that.Contact.find({ name: wxName }))
                     if (contact && sendContent) {
                         console.log(`每日说任务(${sayEveryDay.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
-                        await contact.say(sendContent)
+                        await sendMessage(that, contact, null, sendContent);
                     }
                     //查找群
                     let room = await that.Room.find({ topic: wxName })
                     if (room && sendContent) {
                         console.log(`每日说任务(${sayEveryDay.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
-                        await room.say(sendContent)
+                        await sendMessage(that, null, room, sendContent);
                     }
                 });
             }, `每日说任务-${sayEveryDay.id}`);
@@ -176,13 +177,13 @@ async function startTimedTask(that, timedTasks) {
                     let contact = await (await that.Contact.find({ alias: wxName })) || (await that.Contact.find({ name: wxName }))
                     if (contact && sendContent) {
                         console.log(`定时任务(${task.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
-                        await contact.say(sendContent)
+                        await sendMessage(that, contact, null, sendContent);
                     }
                     //查找群
                     let room = await that.Room.find({ topic: wxName })
                     if (room && sendContent) {
                         console.log(`定时任务(${task.id})给 ${receivingWxNames[index]} 发送消息:${sendContent}`)
-                        await room.say(sendContent)
+                        await sendMessage(that, null, room, sendContent);
                     }
                 });
 
