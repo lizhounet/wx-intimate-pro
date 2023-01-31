@@ -9,8 +9,8 @@ const { WechatyBuilder, log } = Wechaty;
 
 
 // 服务器host 默认
-let platformHostUrl = 'http://localhost:8880/api/public/wx-client';
-let applictionToken = '08da5d97-da10-498f-881f-4eb6f415f76a';
+let platformHostUrl = 'https://wxbot.zhouli.info/api/public/wx-client';
+let applictionToken = '';
 const initConfig = {
     PLATFORM_HOST_URL: process.env['PLATFORM_HOST_URL'] || platformHostUrl,
     APPLICTION_TOKEN: process.env['APPLICTION_TOKEN'] || applictionToken,
